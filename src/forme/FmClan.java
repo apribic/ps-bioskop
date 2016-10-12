@@ -5,7 +5,7 @@
  */
 package forme;
 
-import cl.kontroler.Kontroler;
+import plkontroler.Kontroler;
 import domen.Clan;
 import java.text.SimpleDateFormat;
 import java.util.Date;

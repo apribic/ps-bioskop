@@ -43,6 +43,12 @@ public class MestaURedu {
     public void setSala(Sala sala) {
         this.sala = sala;
     }
+
+    @Override
+    public String toString() {
+        return ("Redni broj reda: "+rbRed+"Broj mesta u redu: "+brojMesta+"Sala: "+sala.getSalaID()); //To change body of generated methods, choose Tools | Templates.
+    }
+    
     
     
 }

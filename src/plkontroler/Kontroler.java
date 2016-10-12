@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package cl.kontroler;
+package plkontroler;
 
-import cl.KolekcijaClan;
+import plkolekcije.KolekcijaClan;
 import domen.Clan;
 import java.util.List;
 
