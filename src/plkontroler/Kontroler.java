@@ -7,7 +7,11 @@ package plkontroler;
 
 import plkolekcije.KolekcijaClan;
 import domen.Clan;
+import domen.Projekcija;
+import domen.Rezervacija;
 import java.util.List;
+import plkolekcije.KolekcijaProjekcija;
+import plkolekcije.KolekcijaRezervacija;
 
 /**
  *
@@ -16,8 +20,10 @@ import java.util.List;
 public class Kontroler {
     
     private KolekcijaClan kc;
+    private KolekcijaProjekcija kp;
+    private KolekcijaRezervacija kr;
     
-    //singleton pattern
+    //singleton
     private static Kontroler instanca;
     
     public static Kontroler vratiInstancu() {
@@ -29,6 +35,8 @@ public class Kontroler {
     
     private Kontroler(){
         kc = new KolekcijaClan();
+        kp = new KolekcijaProjekcija();
+        kr = new KolekcijaRezervacija();
     }
     
     public void sacuvajClana(Clan cl) {
@@ -37,5 +45,21 @@ public class Kontroler {
     
     public List<Clan> vratiListuClanova() {
         return kc.vratiListuClanova();
+    }
+    
+    public void sacuvajProjekciju(Projekcija p) {
+        kp.sacuvajProjekciju(p);
+    }
+    
+    public List<Clan> vratiListuProjekcija() {
+        return kp.vratiListuProjekcija();
+    }
+    
+    public void sacuvajRezervaciju(Rezervacija r) {
+        kr.sacuvajRezervaciju(r);
+    }
+    
+    public List<Clan> vratiListuRezervacija() {
+        return kr.vratiListuRezervacija();
     } 
 }

@@ -64,5 +64,10 @@ public class Film {
         this.opis = opis;
     }
 
+    @Override
+    public String toString() {
+        return ("Naziv: "+naziv+", Godina: "+godina);
+    }
+
     
 }
