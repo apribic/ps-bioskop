@@ -51,7 +51,7 @@ public class Kontroler {
         kp.sacuvajProjekciju(p);
     }
     
-    public List<Clan> vratiListuProjekcija() {
+    public List<Projekcija> vratiListuProjekcija() {
         return kp.vratiListuProjekcija();
     }
     
@@ -59,7 +59,7 @@ public class Kontroler {
         kr.sacuvajRezervaciju(r);
     }
     
-    public List<Clan> vratiListuRezervacija() {
+    public List<Rezervacija> vratiListuRezervacija() {
         return kr.vratiListuRezervacija();
     } 
 }

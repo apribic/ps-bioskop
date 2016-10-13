@@ -31,6 +31,8 @@ public class FmGlavna extends javax.swing.JFrame {
         jmClan = new javax.swing.JMenu();
         jmiPretragaClana = new javax.swing.JMenuItem();
         jmiUnosClana = new javax.swing.JMenuItem();
+        jmProjekcija = new javax.swing.JMenu();
+        jmiUnosProjekcije = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -53,6 +55,18 @@ public class FmGlavna extends javax.swing.JFrame {
         jmClan.add(jmiUnosClana);
 
         jMenuBar1.add(jmClan);
+
+        jmProjekcija.setText("Projekcija");
+
+        jmiUnosProjekcije.setText("Unos projekcije");
+        jmiUnosProjekcije.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiUnosProjekcijeActionPerformed(evt);
+            }
+        });
+        jmProjekcija.add(jmiUnosProjekcije);
+
+        jMenuBar1.add(jmProjekcija);
 
         setJMenuBar(jMenuBar1);
 
@@ -81,6 +95,12 @@ public class FmGlavna extends javax.swing.JFrame {
         FmClan FmC = new FmClan(this, true);
         FmC.setVisible(true);
     }//GEN-LAST:event_jmiUnosClanaActionPerformed
+
+    private void jmiUnosProjekcijeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiUnosProjekcijeActionPerformed
+        // TODO add your handling code here:
+        FmProjekcija fmp = new FmProjekcija(this, true);
+        fmp.setVisible(true);
+    }//GEN-LAST:event_jmiUnosProjekcijeActionPerformed
 
     /**
      * @param args the command line arguments
@@ -120,7 +140,9 @@ public class FmGlavna extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenu jmClan;
+    private javax.swing.JMenu jmProjekcija;
     private javax.swing.JMenuItem jmiPretragaClana;
     private javax.swing.JMenuItem jmiUnosClana;
+    private javax.swing.JMenuItem jmiUnosProjekcije;
     // End of variables declaration//GEN-END:variables
 }

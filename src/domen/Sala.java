@@ -46,7 +46,7 @@ public class Sala {
 
     @Override
     public String toString() {
-        return ("Sala: "+salaID+", Naziv: "+nazivSale+", Adresa: "+adresa); //To change body of generated methods, choose Tools | Templates.
+        return (nazivSale); //To change body of generated methods, choose Tools | Templates.
     }
     
     

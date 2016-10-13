@@ -17,10 +17,10 @@ import java.util.List;
  */
 public class Util {
     //kolekcija sala
-    public static List<Sala> listaSala;                
+    private static List<Sala> listaSala;                
     public static List vratiListuSala(){
         
-        if (listaSala.isEmpty()) {
+        if (listaSala == null) {
             listaSala = new ArrayList<>();
         listaSala.add(new Sala(0, "Jugoslovenska Kinoteka", "Kosovska 11"));
         listaSala.add(new Sala(1, "Muzej kinoteke", "Uzun Mirkova 1"));
@@ -30,10 +30,10 @@ public class Util {
     }
     
     //kolekcija mestaURedovima
-    public static List<MestaURedu> listaMestaURedu;
+    private static List<MestaURedu> listaMestaURedu;
     public static List vratiListuMestaURedu(){
                 
-        if(listaMestaURedu.isEmpty()){
+        if(listaMestaURedu == null){
             listaMestaURedu = new ArrayList<>();
             for (int i = 1; i < 11; i++) {
                 listaMestaURedu.add(new MestaURedu(i, 10, listaSala.get(0)));
@@ -45,10 +45,10 @@ public class Util {
         
     //kolekcija Filmova
 
-    public static List<Film> listaFilmova;
+    private static List<Film> listaFilmova;
     public static List vratiListuFilmova(){
                 
-        if(listaFilmova.isEmpty()){
+        if(listaFilmova == null){
             listaFilmova = new ArrayList<>();
             listaFilmova.add(new Film(0, "Matrix", 1999, "USA", "Opis filma Matrix"));
             listaFilmova.add(new Film(1, "Matrix Reloaded", 2003, "USA", "Opis filma Matrix Reloaded"));
