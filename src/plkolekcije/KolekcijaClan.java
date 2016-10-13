@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package cl;
+package plkolekcije;
 
 import domen.Clan;
 import java.util.ArrayList;

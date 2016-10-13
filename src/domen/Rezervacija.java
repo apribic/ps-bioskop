@@ -5,6 +5,7 @@
  */
 package domen;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.LinkedList;
 
@@ -65,6 +66,11 @@ public class Rezervacija {
 
     public void setProjekcija(Projekcija projekcija) {
         this.projekcija = projekcija;
+    }
+
+    @Override
+    public String toString() {
+        return ("ID: "+rezervacijaID+", Datum: "+new SimpleDateFormat("dd.MM.yyyy.").format(datumOtvaranja)+", Projekcija: "+projekcija.getFilm().getNaziv()+", Stanje: "+stanje+", Clan: "+clan.getClanID()); //To change body of generated methods, choose Tools | Templates.
     }
     
     

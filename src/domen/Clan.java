@@ -5,6 +5,7 @@
  */
 package domen;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -129,7 +130,7 @@ public class Clan {
 
     @Override
     public String toString() {
-        return (clanID+ime+prezime+email+jmbg+datumUclanjenja); //To change body of generated methods, choose Tools | Templates.
+        return (clanID+" "+ime+" "+prezime+" "+email+" "+jmbg+" "+new SimpleDateFormat("dd.MM.yyyy.").format(datumUclanjenja)); //To change body of generated methods, choose Tools | Templates.
     }
     
     

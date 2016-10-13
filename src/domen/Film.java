@@ -24,6 +24,10 @@ public class Film {
         this.opis = opis;
     }
 
+    public Film() {
+        
+    }
+
     public int getFilmID() {
         return filmID;
     }
@@ -62,6 +66,11 @@ public class Film {
 
     public void setOpis(String opis) {
         this.opis = opis;
+    }
+
+    @Override
+    public String toString() {
+        return ("Naziv: "+naziv+", Godina: "+godina);
     }
 
     

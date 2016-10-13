@@ -5,10 +5,14 @@
  */
 package forme;
 
-import cl.kontroler.Kontroler;
+import plkontroler.Kontroler;
 import domen.Clan;
+import gui.komponente.TblModelClan;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 
 /**
  *
@@ -23,6 +27,8 @@ public class FmPrikazClanova extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         popuniComboClanovi();
+        popuniTabeluClanova();
+        //srediTabeluClanova(); //korisceno za potrebe combobox-a u tabeli u primeru sa casa
     }
 
     /**
@@ -36,6 +42,8 @@ public class FmPrikazClanova extends javax.swing.JDialog {
 
         jcomboClanovi = new javax.swing.JComboBox();
         jbtnPrikazi = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jtblClanovi = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -48,16 +56,32 @@ public class FmPrikazClanova extends javax.swing.JDialog {
             }
         });
 
+        jtblClanovi.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(jtblClanovi);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jcomboClanovi, javax.swing.GroupLayout.PREFERRED_SIZE, 352, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jbtnPrikazi)
-                .addContainerGap(34, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 559, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jcomboClanovi, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jbtnPrikazi)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -66,7 +90,9 @@ public class FmPrikazClanova extends javax.swing.JDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jcomboClanovi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jbtnPrikazi))
-                .addContainerGap(318, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 371, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
@@ -121,8 +147,10 @@ public class FmPrikazClanova extends javax.swing.JDialog {
 //    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton jbtnPrikazi;
     private javax.swing.JComboBox jcomboClanovi;
+    private javax.swing.JTable jtblClanovi;
     // End of variables declaration//GEN-END:variables
 
     private void popuniComboClanovi() {
@@ -134,4 +162,14 @@ public class FmPrikazClanova extends javax.swing.JDialog {
         }
         
     }
+
+    private void popuniTabeluClanova() {
+        List<Clan> lcl = Kontroler.vratiInstancu().vratiListuClanova();
+            
+        jtblClanovi.setModel(new TblModelClan(lcl));
+    }
+
+//    private void srediTabeluClanova() {
+//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+//    }
 }

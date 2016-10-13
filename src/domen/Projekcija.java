@@ -5,6 +5,7 @@
  */
 package domen;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -66,6 +67,11 @@ public class Projekcija {
 
     public void setDatumiVreme(Date datumiVreme) {
         this.datumiVreme = datumiVreme;
+    }
+
+    @Override
+    public String toString() {
+        return ("Film: "+film.toString()+", Datum i vreme: "+ new SimpleDateFormat("dd.MM.yyyy. 'u' HH:mm").format(datumiVreme)+", Cena karte: "+cenaKarte); //To change body of generated methods, choose Tools | Templates.
     }
     
     

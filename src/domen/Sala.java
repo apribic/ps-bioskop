@@ -43,6 +43,12 @@ public class Sala {
     public void setAdresa(String adresa) {
         this.adresa = adresa;
     }
+
+    @Override
+    public String toString() {
+        return (nazivSale); //To change body of generated methods, choose Tools | Templates.
+    }
+    
     
     
 }
