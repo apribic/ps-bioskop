@@ -59,7 +59,8 @@ public class FmProjekcija extends javax.swing.JDialog {
         jtxt_Godine = new javax.swing.JTextField();
         jtxt_Zemlja = new javax.swing.JTextField();
         jtxt_Opis = new javax.swing.JTextField();
-        jToggleButton1 = new javax.swing.JToggleButton();
+        jbt_dodaj = new javax.swing.JToggleButton();
+        jbt_Izmeni = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         jcbSala = new javax.swing.JComboBox();
@@ -103,10 +104,17 @@ public class FmProjekcija extends javax.swing.JDialog {
 
         jLabel5.setText("Opis:");
 
-        jToggleButton1.setText("Dodaj film");
-        jToggleButton1.addActionListener(new java.awt.event.ActionListener() {
+        jbt_dodaj.setText("Dodaj film");
+        jbt_dodaj.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jToggleButton1ActionPerformed(evt);
+                jbt_dodajActionPerformed(evt);
+            }
+        });
+
+        jbt_Izmeni.setText("Izmeni");
+        jbt_Izmeni.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbt_IzmeniActionPerformed(evt);
             }
         });
 
@@ -136,8 +144,10 @@ public class FmProjekcija extends javax.swing.JDialog {
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 134, Short.MAX_VALUE)
-                        .addComponent(jToggleButton1)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
+                        .addComponent(jbt_dodaj)
+                        .addGap(18, 18, 18)
+                        .addComponent(jbt_Izmeni)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -146,7 +156,8 @@ public class FmProjekcija extends javax.swing.JDialog {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jToggleButton1))
+                    .addComponent(jbt_dodaj)
+                    .addComponent(jbt_Izmeni))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jcbFilm, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -363,9 +374,13 @@ public class FmProjekcija extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
+    private void jbt_dodajActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbt_dodajActionPerformed
         dodajFilm();
-    }//GEN-LAST:event_jToggleButton1ActionPerformed
+    }//GEN-LAST:event_jbt_dodajActionPerformed
+
+    private void jbt_IzmeniActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbt_IzmeniActionPerformed
+        izmeniFilm();
+    }//GEN-LAST:event_jbt_IzmeniActionPerformed
 
     /**
      * @param args the command line arguments
@@ -428,7 +443,8 @@ public class FmProjekcija extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JTextField jTextField1;
-    private javax.swing.JToggleButton jToggleButton1;
+    private javax.swing.JButton jbt_Izmeni;
+    private javax.swing.JToggleButton jbt_dodaj;
     private javax.swing.JButton jbt_dostupnostSale;
     private javax.swing.JComboBox jcbFilm;
     private javax.swing.JComboBox jcbSala;
@@ -534,7 +550,15 @@ public class FmProjekcija extends javax.swing.JDialog {
     private void dodajFilm() {
         
         String nazivFilma = jtxt_NazivFilma.getText().trim();
-        int godina = Integer.parseInt(jtxt_Godine.getText().trim());
+        int godina;
+        try {
+            godina = Integer.parseInt(jtxt_Godine.getText().trim());
+        } catch (Exception e) {
+            System.out.println(e);
+            JOptionPane.showMessageDialog(this, "Godina nije unesena u pravilnom formatu");
+            return;
+        }
+        
         String zemlja = jtxt_Zemlja.getText().trim();
         String opis = jtxt_Opis.getText().trim();
         
@@ -553,5 +577,27 @@ public class FmProjekcija extends javax.swing.JDialog {
         popuniComboFilm();
         jcbFilm.setSelectedItem(f);
         
+    }
+
+    private void izmeniFilm() {
+        
+        int index = jcbFilm.getSelectedIndex();
+        Film f = new Film();
+        f.setNaziv(jtxt_NazivFilma.getText().trim());
+        try {
+            f.setGodina(Integer.parseInt(jtxt_Godine.getText().trim()));
+        } catch (Exception e) {
+            System.out.println(e);
+            JOptionPane.showMessageDialog(this, "Godina nije unesena u pravilnom formatu");
+            return;
+        }
+        
+        f.setZemljaPorekla(jtxt_Zemlja.getText().trim());
+        f.setOpis(jtxt_Opis.getText().trim()); 
+        f.setFilmID(jcbFilm.getSelectedIndex());
+        Util.vratiListuFilmova().remove(index);
+        Util.vratiListuFilmova().add(index,f);
+        popuniComboFilm();
+        JOptionPane.showMessageDialog(this, "Film je uspesno izmenjen!");
     }
 }

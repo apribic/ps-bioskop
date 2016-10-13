@@ -24,6 +24,10 @@ public class Film {
         this.opis = opis;
     }
 
+    public Film() {
+        
+    }
+
     public int getFilmID() {
         return filmID;
     }
