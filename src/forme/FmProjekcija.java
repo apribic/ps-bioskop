@@ -205,20 +205,22 @@ public class FmProjekcija extends javax.swing.JDialog {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jcbSala, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel7)
-                        .addGap(18, 18, 18)
-                        .addComponent(jlblNazivSale, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel8)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jlblAdresa, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel6)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel13)
-                        .addGap(18, 18, 18)
-                        .addComponent(jtxt_cena)))
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jLabel13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, 42, Short.MAX_VALUE))
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jlblAdresa, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jlblNazivSale, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGap(5, 5, 5)
+                                .addComponent(jtxt_cena)))))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -461,7 +463,7 @@ public class FmProjekcija extends javax.swing.JDialog {
 
     private void popuniComboFilm() {
         jcbFilm.removeAllItems();
-        List<Film> listaFilmova = Util.vratiListuFilmova();
+        List<Film> listaFilmova = Kontroler.vratiInstancu().vratiListuFilmova();
         
         for(Film f : listaFilmova) {
             jcbFilm.addItem(f);
@@ -470,7 +472,7 @@ public class FmProjekcija extends javax.swing.JDialog {
 
     private void popuniComboSale() {
         jcbSala.removeAllItems();
-        List<Sala> listaSala = Util.vratiListuSala();
+        List<Sala> listaSala = Kontroler.vratiInstancu().vratiListuSala();
         
         for(Sala s : listaSala) {
             jcbSala.addItem(s);
@@ -562,7 +564,7 @@ public class FmProjekcija extends javax.swing.JDialog {
         String zemlja = jtxt_Zemlja.getText().trim();
         String opis = jtxt_Opis.getText().trim();
         
-        List<Film> listaFilmova = Util.vratiListuFilmova();
+        List<Film> listaFilmova = Kontroler.vratiInstancu().vratiListuFilmova();
         for (Film f : listaFilmova){
             if(f.getNaziv().equalsIgnoreCase(nazivFilma) && f.getGodina()==godina && f.getZemljaPorekla().equalsIgnoreCase(zemlja)){
                 jcbFilm.setSelectedItem(f);
@@ -571,11 +573,15 @@ public class FmProjekcija extends javax.swing.JDialog {
             }
         }
         
-        Film f = new Film(Util.vratiListuFilmova().size(), nazivFilma, godina, zemlja, opis);
-        Util.vratiListuFilmova().add(f);
-        JOptionPane.showMessageDialog(this, "Novi film je uspesno unesen!");
+        if (Kontroler.vratiInstancu().dodajFilmUBazu(nazivFilma, godina, zemlja, opis)){
+            JOptionPane.showMessageDialog(this, "Novi film je uspesno unesen!");
+        } else { 
+            JOptionPane.showMessageDialog(this, "Film nije unesen. Probajte ponovo"); 
+        }
+        
+                
         popuniComboFilm();
-        jcbFilm.setSelectedItem(f);
+        jcbFilm.setSelectedIndex(Kontroler.vratiInstancu().vratiListuFilmova().size()-1);
         
     }
 
@@ -595,8 +601,8 @@ public class FmProjekcija extends javax.swing.JDialog {
         f.setZemljaPorekla(jtxt_Zemlja.getText().trim());
         f.setOpis(jtxt_Opis.getText().trim()); 
         f.setFilmID(jcbFilm.getSelectedIndex());
-        Util.vratiListuFilmova().remove(index);
-        Util.vratiListuFilmova().add(index,f);
+        Kontroler.vratiInstancu().vratiListuFilmova().remove(index);
+        Kontroler.vratiInstancu().vratiListuFilmova().add(index,f);
         popuniComboFilm();
         JOptionPane.showMessageDialog(this, "Film je uspesno izmenjen!");
     }

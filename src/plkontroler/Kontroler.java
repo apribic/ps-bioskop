@@ -5,10 +5,13 @@
  */
 package plkontroler;
 
+import db.DBKonekcija;
 import plkolekcije.KolekcijaClan;
 import domen.Clan;
+import domen.Film;
 import domen.Projekcija;
 import domen.Rezervacija;
+import domen.Sala;
 import java.util.List;
 import plkolekcije.KolekcijaProjekcija;
 import plkolekcije.KolekcijaRezervacija;
@@ -22,7 +25,7 @@ public class Kontroler {
     private KolekcijaClan kc;
     private KolekcijaProjekcija kp;
     private KolekcijaRezervacija kr;
-    
+    private DBKonekcija db;
     //singleton
     private static Kontroler instanca;
     
@@ -37,6 +40,7 @@ public class Kontroler {
         kc = new KolekcijaClan();
         kp = new KolekcijaProjekcija();
         kr = new KolekcijaRezervacija();
+        db = new DBKonekcija();
     }
     
     public void sacuvajClana(Clan cl) {
@@ -61,5 +65,25 @@ public class Kontroler {
     
     public List<Rezervacija> vratiListuRezervacija() {
         return kr.vratiListuRezervacija();
-    } 
+    }
+    
+    public List<Sala> vratiListuSala() {
+        return db.vratiListuSala();
+    }
+    
+    public List<Film> vratiListuFilmova() {
+        return db.vratiListuFilmova();
+    }
+    
+    public boolean dodajFilmUBazu(String nazivFilma, int godina, String zemlja, String opis){
+        try {
+            db.dodajFilm(nazivFilma, godina, zemlja, opis);
+            
+        } catch (Exception e) {
+          
+            return false;   
+        }
+        return true;
+        
+    }
 }
